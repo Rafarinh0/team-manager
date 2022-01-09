@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'team-manager';
+  teste = true;
+
+  lista = [{nome: 'Nome 1'}, {nome: 'Nome 2'}, {nome: 'Nome 3'}];
 }
