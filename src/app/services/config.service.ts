@@ -10,6 +10,7 @@ export class ConfigService {
   screenWidth: number = window.innerWidth; //retorna o width atual da tela
   mobile: boolean = this.screenWidth <=this.MOBILE_MAX_WIDTH;
   smallDesktop: boolean = this.screenWidth <= this.SMALL_DESKTOP;
+  
 
   constructor() {
     window.addEventListener('resize', (event)=>{

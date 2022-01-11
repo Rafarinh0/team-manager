@@ -1,2 +1,31 @@
-<p>header works!</p>
-{{homeRoute}}
+<div class="header-bar">
+  <div class="content row" [ngClass]="{'content-center': isHome || hideOptions}">
+      <div *ngIf="hideOptions" class="menu-btn-absolute">
+        <button (click)="sideBarVisible = true" class="btn menu-btn">
+          <i class="fa fa-bars header-icon"> </i>
+        </button>
+      </div>
+      <div class="text-center" [ngClass]="{'col-3': !isHome && !hideOptions}">
+          <img [routerLink]="homeRoute" class="vsg-logo clickable" src="../../../../assets/images/visagio.png">
+      </div>
+      <div *ngIf="!isHome && !hideOptions" class="col-6 text-center">
+        <button [routerLink]="homeRoute" *ngIf="router.url != homeRoute" class="btn option-btn option-text">
+          <i class="fa fa-home mr-1"></i> HOME
+        </button>
+        <button [routerLink]="teamsRoute" *ngIf="router.url != teamsRoute" class="btn option-btn option-text">
+          <i class="fa fa-users mr-1"></i> EQUIPES
+        </button>
+        <button [routerLink]="personsRoute" *ngIf="router.url != personsRoute" class="btn option-btn option-text">
+          <i class="fa fa-user mr-1"></i> PESSOAS
+        </button>
+        <button [routerLink]="studyRoute" *ngIf="router.url != studyRoute" class="btn option-btn option-text">
+          <i class="fa fa-book mr-1"></i> ESTUDOS
+        </button>
+      </div>
+      <div *ngIf="!hideOptions" class="col-3 text-right"  [ngClass]="{'config-btn-absolute': isHome || hideOptions, 'col-3': !isHome && !hideOptions}">
+        <button class="btn config-btn">
+          <i class="fa fa-cog header-icon"> </i>
+        </button>
+      </div>
+  </div>
+</div>
