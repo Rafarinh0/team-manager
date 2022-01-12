@@ -5,17 +5,32 @@
       <div class="module-title">
         GERENCIAMENTO DE PESSOAS
       </div>
-      <button *ngIf="!showEdit" click="showRegister = true" class="btn module-btn">
+      <button *ngIf="!showEdit" (click)="showRegister = true" class="btn module-btn">
         Cadastrar Pessoa
       </button>
     </div>
     <div [ngClass]="{'col-lg-6': showRegister || showEdit}" class="col-12 mb-3"> <!--- só vai aparecer se for um cadastro ou uma ediçao --->
-
+      <p-table [value]="personList" [paginator]="true" [rows]="10">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th *ngIf="!config.mobile">Localização</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-person>
+          <tr class="line-hover clickable" (click)="editPerson(person)">
+            <td>{{person.name}}</td>
+            <td>{{person.email}}</td>
+            <td *ngIf="!config.mobile">{{person.locationName}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
     <div *ngIf="showRegister || showEdit" class="col-12 col-lg-6 row m-0-auto">
       <div class="col-12 module-subtitle mb-3">
         <ng-container *ngIf="showRegister; else edit">
-
+          CADASTRAR PESSOA
         </ng-container>
       </div>
       <ng-template #edit>
@@ -24,10 +39,61 @@
       <div class="col-12 col-md-6 input-container">
         <div class="input-size">
           <div class="model-label">
-            Nome
+              Nome
           </div>
-          <input type="text" pInputText [(ngModel)]="person.name" placeholder="Nome e Sobrenome">
+          <input type="text" pInputText [(ngModel)]="person.name" placeholder="Nome e sobrenome">
         </div>
+      </div>
+      <div class="col-12 col-md-6 input-container">
+        <div class="input-size">
+          <div class="model-label">
+            CPF
+          </div>
+          <p-inputMask [(ngModel)]="person.document" placeholder="999.999.999-99" mask="999.999.999-99"></p-inputMask>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 input-container">
+        <div class="input-size">
+          <div class="model-label">
+              Email
+          </div>
+          <input type="text" pInputText [(ngModel)]="person.email" placeholder="nome.sobrenome@visagio.com">
+        </div>
+      </div>
+      <div class="col-12 col-md-6 input-container">
+        <div class="input-size">
+          <div class="model-label">
+              Mentor
+          </div>
+          <p-dropdown placeholder="Escolha o mentor" [options]="mentorsList" (onChange)="setProperty($event, 'id', person, 'mentorId')" [(ngModel)]="personMentor" optionLabel="name"></p-dropdown>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 input-container">
+        <div class="input-size">
+          <div class="model-label">
+              Localização
+          </div>
+          <p-dropdown placeholder="Escolha a Localização" [options]="locationsList" (onChange)="setProperty($event, 'id', person, 'location')" [(ngModel)]="personLocation" optionLabel="name"></p-dropdown>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 input-container">
+        <div class="input-size multi-select-container">
+          <div class="model-label">
+              Skills
+          </div>
+          <p-multiSelect [options]="skills" [(ngModel)]="personSkills" optionLabel="name" defaultLabel="Escolha" selectedItemsLabel="[0] itens selecionados"></p-multiSelect>
+        </div>
+      </div>
+      <div class="col-12 d-flex">
+        <button (click)="cancel()" class="btn module-btn">
+          Cancelar
+        </button>
+        <button (click)="cancel()" class="btn delete-btn">
+          Excluir
+        </button>
+        <button (click)="cancel()" class="btn module-btn">
+          Salvar
+        </button>
       </div>
     </div>
   </div>
