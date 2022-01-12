@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonsComponent implements OnInit {
 
+  showRegister = false;
+  showEdit = false;
+  showSuccess = false;
   constructor() { }
 
   ngOnInit(): void {

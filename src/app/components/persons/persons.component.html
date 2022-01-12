@@ -1,2 +1,36 @@
+<header></header>
+<div class="vsg-container">
+  <div class="row">
+    <div class="col-12 mb-5">
+      <div class="module-title">
+        GERENCIAMENTO DE PESSOAS
+      </div>
+      <button *ngIf="!showEdit" click="showRegister = true" class="btn module-btn">
+        Cadastrar Pessoa
+      </button>
+    </div>
+    <div [ngClass]="{'col-lg-6': showRegister || showEdit}" class="col-12 mb-3"> <!--- só vai aparecer se for um cadastro ou uma ediçao --->
+
+    </div>
+    <div *ngIf="showRegister || showEdit" class="col-12 col-lg-6 row m-0-auto">
+      <div class="col-12 module-subtitle mb-3">
+        <ng-container *ngIf="showRegister; else edit">
+
+        </ng-container>
+      </div>
+      <ng-template #edit>
+        EDITAR PESSOA
+      </ng-template>
+      <div class="col-12 col-md-6 input-container">
+        <div class="input-size">
+          <div class="model-label">
+            Nome
+          </div>
+          <input type="text" pInputText [(ngModel)]="person.name" placeholder="Nome e Sobrenome">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
