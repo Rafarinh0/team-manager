@@ -16,7 +16,10 @@ import {DropdownModule} from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import {TableModule} from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastComponent } from './components/common/toast/toast.component';
+import {ToastModule} from 'primeng/toast';
+import {ConfigService} from './services/config.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { ConfirmationService } from 'primeng/api';
     HomeComponent,
     ImageButtonComponent,
     PersonsComponent,
-    HeaderComponent
+    HeaderComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +42,13 @@ import { ConfirmationService } from 'primeng/api';
     MultiSelectModule,
     TableModule,
     ConfirmDialogModule,
-    ConfirmationService
+    ToastModule
   ],
-  providers: [],
+  exports: [
+    ToastModule,
+    BrowserAnimationsModule
+  ],
+  providers: [ConfigService, ConfirmationService, MessageService, ToastComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

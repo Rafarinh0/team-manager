@@ -5,6 +5,8 @@ import { skills } from 'src/app/models/enums/skills';
 import { Person } from 'src/app/models/person';
 import { ModuleUtilsService } from 'src/app/services/module-utils..service';
 import { ConfigService } from 'src/app/services/config.service';
+import { ToastComponent } from '../common/toast/toast.component';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-persons',
@@ -28,7 +30,7 @@ export class PersonsComponent extends ModuleUtilsService implements OnInit {
   showEdit = false;
   showSuccess = false;
 
-  constructor(public config: ConfigService) { super(); }
+  constructor(public config: ConfigService, private toast: ToastComponent, private confirmationService: ConfirmationService) { super(); }
 
   ngOnInit(): void {
     this.getPersons();
@@ -58,10 +60,12 @@ export class PersonsComponent extends ModuleUtilsService implements OnInit {
       this.person.id = this.generateId();
       this.personList.push(this.person);
       this.showRegister = false;
+      this.toast.openToast('success', 'Pessoa cadastrada com sucesso!');
     }else{ //is edit
       const personIndex = this.personList.findIndex(p => p.id === this.person.id);
       this.personList[personIndex] = this.person;
       this.showEdit = false;
+      this.toast.openToast('success', 'Pessoa editada com sucesso!');
     }
 
     localStorage['setItems']('persons', JSON.stringify(this.personList));
@@ -69,17 +73,17 @@ export class PersonsComponent extends ModuleUtilsService implements OnInit {
   }
 
   getPersons(){
-    const list = JSON.parse(localStorage.getItem('persons')|| '{}');
+    const list = JSON.parse(localStorage.getItem('persons')!);
     list ? this.personList = list : this.personList = [];
     this.getLocation();
   }
 
   getLocation(){
-    this.personList.forEach((person: any)=>{
+    this.personList.forEach((person:any)=>{
       const location = this.locationsList.find(loc=>loc.id===person.location);
       const locationName = location ? location.name : '-';
       person.locationName = locationName;
-    })
+    });
   }
 
   editPerson(person: Person){
@@ -99,6 +103,24 @@ export class PersonsComponent extends ModuleUtilsService implements OnInit {
         this.personSkills.push(skill);
       })
     }
+  }
+
+  delete(){
+    this.confirmationService.confirm({
+      message: `Você tem certeza que deseja excluir ${this.person.name}?`,
+      header: 'Confirmar',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        const personIndex = this.personList.findIndex(p => p.id === this.person.id);
+        this.personList.splice(personIndex, 1);
+        this.toast.openToast('success', 'Pessoa Excluída com sucesso');
+        localStorage.setItem('persons', JSON.stringify(this.personList));
+        this.cancel();
+        this.getPersons(); // reload data
+      }
+    });
   }
 
 }
