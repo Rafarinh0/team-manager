@@ -29,3 +29,28 @@
       </div>
   </div>
 </div>
+
+<p-sidebar [(visible)]="sideBarVisible" [baseZIndex]="10000">
+    <div class="details">
+      <div class="details-center">
+        <i class="fa fa-user-circle user-icon"> </i>
+        <div class="user-name">
+          User Name
+        </div>
+      </div>
+    </div>
+    <button [routerLink]="homeRoute" class="btn sidebar-btn sidebar-text mt-3">
+      <i class="fa fa-home mr-1"></i> HOME
+    </button>
+    <button [routerLink]="teamsRoute" *ngIf="router.url != teamsRoute" class="btn sidebar-btn option-text">
+      <i class="fa fa-users mr-1"></i> EQUIPES
+    </button>
+    <button [routerLink]="personsRoute" *ngIf="router.url != personsRoute" class="btn option-btn option-text">
+      <i class="fa fa-user mr-1"></i> PESSOAS
+    </button>
+    <button [routerLink]="studyRoute" *ngIf="router.url != studyRoute" class="btn option-btn option-text">
+      <i class="fa fa-book mr-1"></i> ESTUDOS
+    </button>
+</p-sidebar>
+
+

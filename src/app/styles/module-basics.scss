@@ -1,0 +1,76 @@
+.module-title {
+    margin-top: 25px;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.module-subtitle {
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.module-btn {
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    min-width: 100px;
+}
+
+.delete-btn {
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+    color: #ce1c1c;
+    border: 1px solid #ce1c1c;
+    border-radius: 5px;
+    min-width: 100px;
+}
+
+.model-label {
+    color: black;
+    font-weight: bold;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.input-size {
+    width: 90%;
+}
+
+.success-screen { 
+    font-weight: bold;
+    color: black;
+    font-size: 20px;
+}
+
+.line-hover:hover {
+    background-color: #dad8e0 !important;
+}
+
+p-table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (min-width: 1250px) {
+    .input-size {
+        width: 70%;
+    }
+}
+
+:host ::ng-deep {
+    .ui-inputtext, .ui-dropdown, .ui-multiselect {
+        width: 100%;
+    }
+}

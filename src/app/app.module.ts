@@ -8,6 +8,7 @@ import { ImageButtonComponent } from './components/common/image-button/image-but
 import { PersonsComponent } from './components/persons/persons.component';
 import { HeaderComponent } from './components/common/header/header.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {SidebarModule} from 'primeng/sidebar';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SidebarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
